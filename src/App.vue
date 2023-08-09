@@ -2,11 +2,14 @@
 useHead({
   title: import.meta.env.VITE_APP_TITLE,
 })
+
 </script>
 
 <template>
-  <main font-sans p="x-4 y-10" text="center gray-700 dark:gray-200">
+  <div
+   class="app"
+   :class="{isDark, shooting}"
+  >
     <RouterView />
-    <TheFooter />
-  </main>
+  </div>
 </template>
