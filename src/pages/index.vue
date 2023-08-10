@@ -22,7 +22,13 @@ const caseStyle = computed(() => ({
     <div id="phone-case-inner">
       <Nav>
         <Title />
+        <div v-show="!shooting" class="buttons">
+          <Buttons />
+        </div>
       </Nav>
+      <PostBody>
+
+      </PostBody>
     </div>
   </div>
 </template>

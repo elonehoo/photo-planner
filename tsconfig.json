@@ -36,6 +36,9 @@
             ],
             "~/*": [
                 "src/*"
+            ],
+            "~buttons/*": [
+                "src/components/buttons/*"
             ]
         }
     },

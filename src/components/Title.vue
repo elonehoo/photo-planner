@@ -3,6 +3,6 @@
 
 <template>
   <div v-if="width > 300" class="header">
-    Foto<br><b>Rehearse</b>
+    Photo<br><b>Planner</b>
   </div>
 </template>
