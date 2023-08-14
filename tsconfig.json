@@ -24,20 +24,14 @@
             "~components/*": [
                 "src/components/*"
             ],
-            "~composables/*": [
-                "src/composables/*"
-            ],
-            "~pages/*": [
-                "src/pages/*"
-            ],
             "~styles/*": [
                 "src/styles/*"
             ],
             "~/*": [
                 "src/*"
             ],
-            "~buttons/*": [
-                "src/components/buttons/*"
+            "~composition/*": [
+                "src/composition/*"
             ]
         }
     },
