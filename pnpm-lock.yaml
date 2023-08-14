@@ -88,9 +88,6 @@ devDependencies:
   vite:
     specifier: ^4.4.9
     version: 4.4.9(@types/node@20.5.0)
-  vite-inspector:
-    specifier: ^0.1.0
-    version: 0.1.0
   vite-plugin-alias:
     specifier: ^0.1.0
     version: 0.1.0(@types/node@20.5.0)(eslint@8.47.0)(typescript@5.1.6)
@@ -106,9 +103,6 @@ devDependencies:
   vite-plugin-package-configs:
     specifier: ^0.0.11
     version: 0.0.11
-  vite-plugin-terminal-log:
-    specifier: ^0.0.1
-    version: 0.0.1
   vitest:
     specifier: ^0.34.1
     version: 0.34.1(@vitest/ui@0.34.1)(happy-dom@10.9.0)
@@ -4514,10 +4508,6 @@ packages:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
 
-  /shell-quote@1.8.1:
-    resolution: {integrity: sha512-6j1W9l1iAs/4xYBI1SYOVZyFcCis9b4KCLQ8fgAGG07QvzaRLVVRQvAy85yNmmZSjYjg4MWh4gNvlPujU/5LpA==}
-    dev: true
-
   /siginfo@2.0.0:
     resolution: {integrity: sha512-ybx0WO1/8bSBLEWXZvEd7gMW3Sn3JFlW3TvX1nREbDLRNQNaeNN8WK0meBwPdAaOI7TtRRRJn/Es1zhrrCHu7g==}
     dev: true
@@ -5015,14 +5005,6 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite-inspector@0.1.0:
-    resolution: {integrity: sha512-P+DxhrUTjjeDSHWekSs74v0WAu4bfigiruPCFXaNdjBzGjpwMQhLFKSSYQfc246fFtHaFUPvovBFMnQk6G55gQ==}
-    dependencies:
-      fs-extra: 11.1.1
-      kolorist: 1.8.0
-      shell-quote: 1.8.1
-    dev: true
-
   /vite-node@0.34.1(@types/node@20.5.0):
     resolution: {integrity: sha512-odAZAL9xFMuAg8aWd7nSPT+hU8u2r9gU3LRm9QKjxBEF2rRdWpMuqkrkjvyVQEdNFiBctqr2Gg4uJYizm5Le6w==}
     engines: {node: '>=v14.18.0'}
@@ -5109,13 +5091,6 @@ packages:
       debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /vite-plugin-terminal-log@0.0.1:
-    resolution: {integrity: sha512-8oAcZiK7KteOicqqCJtlBCiZ5UPbIqVPTFppvF+CVUin+w6VMUVMRorI3VqS7fmF4/hyMVlkHs0CBzedOHO7Sw==}
-    engines: {node: '>=v14.21.3'}
-    dependencies:
-      kolorist: 1.8.0
     dev: true
 
   /vite@4.4.6(@types/node@20.5.0):

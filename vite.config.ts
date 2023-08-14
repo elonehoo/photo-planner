@@ -5,24 +5,14 @@ import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import DeployInfo from 'unplugin-deploy-info/vite'
 import UnoCss from 'unocss/vite'
-import Inspector from 'vite-inspector'
 import Alias from 'vite-plugin-alias'
 import PKG from 'vite-plugin-package-configs'
 import AutoEnv from 'vite-plugin-auto-env'
 import Chai from 'vite-plugin-chai'
 import Classify from 'vite-plugin-classify'
-import TerminalLog from 'vite-plugin-terminal-log'
 
 export default defineConfig({
   plugins: [
-    // https://github.com/vite-inspector/vite-inspector
-    Inspector({
-      framework: 'vue',
-    }),
-
-    // https://github.com/elonehoo/vite-plugin-terminal-log
-    TerminalLog(),
-
     // https://github.com/vitejs/vite-plugin-vue
     Vue(),
 
