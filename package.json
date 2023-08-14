@@ -30,6 +30,9 @@
     "@unocss/reset": "^0.53.6",
     "@vueuse/core": "^10.2.1",
     "@vueuse/head": "^1.1.26",
+    "chroma-js": "^2.4.2",
+    "html2canvas": "^1.4.1",
+    "mobile-drag-drop": "3.0.0-rc.0",
     "unocss": "^0.53.6",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"

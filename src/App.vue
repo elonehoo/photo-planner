@@ -8,7 +8,7 @@ useHead({
 <template>
   <div
    class="app"
-   :class="{isDark, shooting}"
+   :class="{dark, shooting}"
   >
     <RouterView />
   </div>

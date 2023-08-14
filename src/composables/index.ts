@@ -1,140 +1,254 @@
-export * from './desktop'
-export * from './utils'
+import html2canvas from 'html2canvas'
 
-export const tab = ref(0)
-export const gap = ref(3)
-export const dark = ref(false)
+export const STORE_PREFIX = 'foto-rehearse-posts'
+export const CONFIG_PREFIX = 'foto-rehearse-config'
+const DEFAULT_POSTS = 8
+const DEFAULT_IMAGES = [
+  '/examples/photo-1588055312392-97068a233ee2.jpeg',
+]
 
-export const { width, height } = useWindowSize()
-export const posts = ref([])
-export const dragging = ref(false)
-export const shooting = ref(false)
-export const locked = ref(false)
-export const toast = ref('')
-export const imageMode = ref(0) // 0: photo, 1: thief, 2: pattele
-export let db
-export let toastTimer
-
- openDb().then(async(i) => {
-  db = i
-  window.db = db
-  posts.value = await loadPosts(db, tab.value)
-})
-
-export const PHONE_RATIO = 0.55
-export const isDesktop = computed(() => {
-  return width.value > 500 && width.value / height.value > PHONE_RATIO
-})
-export const caseWidth = computed(() => {
-  return Math.min(
-    width.value,
-    isDesktop.value
-      ? height.value * PHONE_RATIO - 5
-      : width.value,
-  )
-})
-export const size = computed(() => {
-  return (caseWidth.value - gap.value * 2) / 3
-})
-export const caseStyle = computed(() => ({
-  width: `${caseWidth.value}px`,
-}))
-export const handleUploaded = (index, urls) => {
-  for (let i = 0; i < urls.length; i++) {
-    // append to tail
-    if (!posts.value[i + index])
-      posts.value.push({ url: urls[i] })
-    // insert into middle
-    else if (posts.value[i + index].url)
-      posts.value.splice(i + index, 0, { url: urls[i] })
-    // replace empty
-    else
-      posts.value[i + index].url = urls[i]
-  }
-}
-export const drop = (to, e) => {
-  dragging.value = false
-  const from = +e.dataTransfer.getData('idx')
-  posts.value.splice(to, 0, posts.value.splice(from, 1)[0])
-}
-export const dropRemove = (e) => {
-  dragging.value = false
-  const from = +e.dataTransfer.getData('idx')
-  posts.value.splice(from, 1)
-}
-export const drag = (idx, e) => {
-  dragging.value = true
-  e.dataTransfer.setData('idx', idx)
-  try {
-    window.navigator.vibrate(100)
-  }
-  catch {}
-}
-export const dragend = () => {
-  dragging.value = false
-}
-export const allowDrop = (e) => {
-  e.preventDefault()
-  return false
-}
-export const add = () => {
-  posts.value.push({ url: '' })
-}
-export const addFront = () => {
-  posts.value.unshift({ url: '' })
-}
-export const openPopup = async() => {
-  locked.value = true
-  toast.value = 'Poped'
-  await popup(location.href, 'foto-rehearse', caseWidth.value, height.value)
-  location.reload()
-}
-export const shoot = () => {
-  shooting.value = true
-  toast.value = 'Taking Screenshot'
-  nextTick(() => {
-    takeScreenshot()
-    shooting.value = false
+function useEventListener(type:any, listener:any, options?:any, target?:any) {
+  if (target === undefined) target = window
+  onMounted(() => {
+    target.addEventListener(type, listener, options)
+  })
+  onUnmounted(() => {
+    target.removeEventListener(type, listener, options)
   })
 }
-export const toggleDark = () => {
-  dark.value = !dark.value
-  toast.value = dark.value ? 'Dark mode' : 'Light mode'
+
+export async function takeScreenshot(
+  selector = '#phone-case-inner',
+  filename = `foto-rehearsal-${new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-')}.png`,
+) {
+  return new Promise((resolve) => {
+    html2canvas(
+      document.querySelector(selector)!,
+      { scale: 4 },
+    ).then((canvas) => {
+      canvas.toBlob((blob) => {
+        window.saveAs(blob, filename)
+        resolve()
+      })
+    })
+  })
 }
-export const toggleGap = () => {
-  gap.value = gap.value ? 0 : 3
-  toast.value = gap.value ? 'Gap on' : 'Gap off'
+
+export function useWindowSize() {
+  const width = ref(window.innerWidth)
+  const height = ref(window.innerHeight)
+  useEventListener('resize', () => {
+    width.value = window.innerWidth
+    height.value = window.innerHeight
+  })
+  return { width, height }
 }
-export const switchMode = () => {
-  imageMode.value = (imageMode.value + 1) % 3
-  toast.value = ['Image mode', 'Color mode', 'Pattle mode'][imageMode.value]
-}
-export const switchTab = () => {
-  tab.value = (tab.value + 1) % 3
-  toast.value = `Tab ${tab.value + 1}`
-}
-watch(
-  posts,
-  () => {
-    savePosts(db, posts.value, tab.value)
-  }, {
-    deep: true,
+
+const Serializers = {
+  boolean: {
+    read(v:any) { return v === 'true' },
+    write(v:any) { return String(v) },
   },
-)
-watch(
-  tab,
-  async() => {
-    posts.value = await loadPosts(db, tab.value)
+  object: {
+    read(v:any, d:any) { return v ? JSON.parse(v) : d },
+    write(v:any) { return JSON.stringify(v) },
   },
-)
-watch(
-  toast,
-  () => {
-    if (toast.value) {
-      clearTimeout(toastTimer)
-      toastTimer = setTimeout(() => {
-        toast.value = ''
-      }, TOAST_TIMEOUT)
+  number: {
+    read(v:any, d:any) { return v != null ? Number.parseFloat(v) : d },
+    write(v:any) { return String(v) },
+  },
+  any: {
+    read(v:any, d:any) { return v !== null && v !== undefined ? v : d },
+    write(v:any) { return String(v) },
+  },
+  string: {
+    read(v:any, d:any) { return v !== null && v !== undefined ? v : d },
+    write(v:any) { return String(v) },
+  },
+}
+
+export function useStorage(key:any, defaultValue:any, storage:any) {
+  if (storage === undefined) storage = localStorage
+  const data = ref(defaultValue)
+  const type = defaultValue == null
+    ? 'any'
+    : typeof defaultValue === 'boolean'
+      ? 'boolean'
+      : typeof defaultValue === 'string'
+        ? 'string'
+        : typeof defaultValue === 'object'
+          ? 'object'
+        // @ts-ignore
+          : !Number.isNaN(defaultValue)
+            ? 'number'
+            : 'any'
+  function read() {
+    try {
+      let rawValue = storage.getItem(key)
+      if (rawValue === undefined && defaultValue) {
+        rawValue = Serializers[type].write(defaultValue)
+        storage.setItem(key, rawValue)
+      }
+      else {
+        data.value = Serializers[type].read(rawValue, defaultValue)
+      }
     }
-  },
-)
+    catch (e) {
+      console.warn(e)
+    }
+  }
+  read()
+  useEventListener('storage', read)
+  watch(data, () => {
+    try {
+      if (data.value == null)
+        storage.removeItem(key)
+      else
+        storage.setItem(key, Serializers[type].write(data.value))
+    }
+    catch (e) {
+      console.warn(e)
+    }
+  }, { flush: 'sync', deep: true })
+  return data
+}
+
+export function openDb() {
+  return new Promise((resolve:any) => {
+    const request = window.indexedDB.open(STORE_PREFIX, 1)
+
+    request.onerror = function(event) {
+      alert(`Failed to open db:\n${event.toString()}`)
+    }
+
+    request.onsuccess = function(event) {
+      resolve(request.result)
+    }
+
+    request.onupgradeneeded = function(event:any) {
+      const db = event.target.result
+      const stores = []
+      for (let i = 0; i < 5; i++) {
+        if (!db.objectStoreNames.contains(`posts-${i}`))
+          stores.push(db.createObjectStore(`posts-${i}`, { keyPath: 'id' }))
+      }
+
+      for (let i = 0; i < DEFAULT_POSTS; i++)
+        stores[0].put({ id: i, url: DEFAULT_IMAGES[i] || '' })
+    }
+  })
+}
+
+export function loadPosts(db:any, tab = 0) {
+  return new Promise((resolve) => {
+    const store = db.transaction([`posts-${tab}`], 'readwrite')
+      .objectStore(`posts-${tab}`)
+    const request = store.getAll()
+    request.onsuccess = () => {
+      let posts = request.result
+      if (!posts || !posts.length) {
+        posts = new Array(DEFAULT_POSTS)
+          .fill(null)
+          .map((_, id) => ({ id, url: '' }))
+      }
+      posts.sort((a:any, b:any) => a.id - b.id)
+      resolve(posts)
+    }
+  })
+}
+
+export function savePosts(db:any, posts:any[] = [], tab = 0) {
+  const store = db.transaction([`posts-${tab}`], 'readwrite')
+    .objectStore(`posts-${tab}`)
+
+  const count = posts.length
+
+  store.clear()
+
+  for (let i = 0; i < count; i++)
+    store.put({ id: i.toString(), url: posts[i].url })
+}
+
+export function resizedataURL(url:any, MAX_WIDTH = 512, MAX_HEIGHT = 512) {
+  const img = document.createElement('img')
+
+  return new Promise((resolve) => {
+    img.onload = function() {
+      // We create a canvas and get its context.
+      const canvas = document.createElement('canvas')
+      const ctx = canvas.getContext('2d')
+
+      let width = img.width
+      let height = img.height
+
+      if (width > height) {
+        if (width > MAX_WIDTH) {
+          height *= MAX_WIDTH / width
+          width = MAX_WIDTH
+        }
+      }
+      else {
+        if (height > MAX_HEIGHT) {
+          width *= MAX_HEIGHT / height
+          height = MAX_HEIGHT
+        }
+      }
+
+      canvas.width = width
+      canvas.height = height
+
+      ctx.drawImage(this, 0, 0, width, height)
+
+      resolve(canvas.toDataURL())
+
+      img.remove()
+    }
+
+    img.src = url
+  })
+}
+
+export async function getDataUrls(files:any) {
+  return await Promise.all(
+    Array
+      .from(files)
+      .map((file) => {
+        return new Promise((resolve) => {
+          const reader = new FileReader()
+          reader.addEventListener('load', async() => {
+            const url = reader.result
+            const resized = await resizedataURL(url, 512, 512)
+            resolve(resized)
+          }, false)
+
+          reader.readAsDataURL(file)
+        })
+      }),
+  )
+}
+
+export async function popup(url:any, name:any, width:any, height:any) {
+  return new Promise((resolve) => {
+    const newWin = window.open(url, name, `height=${height},width=${width}`)
+    newWin.addEventListener('beforeunload', () => resolve())
+    if (window.focus)
+      newWin.focus()
+  })
+}
+
+export function rgbToHex(r:any, g:any, b:any) {
+  return `#${[r, g, b].map((x) => {
+    const hex = x.toString(16)
+    return hex.length === 1 ? `0${hex}` : hex
+  }).join('')}`
+}
+
+export async function getColors(url:any, amount = 5) {
+  const img = document.createElement('img')
+  await new Promise((resolve) => {
+    img.onload = () => resolve()
+    img.src = url
+  })
+  const palette = new window.ColorThief().getPalette(img, amount)
+  return palette.map((rgb:any) => rgbToHex(...rgb))
+}
