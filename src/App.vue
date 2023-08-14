@@ -172,52 +172,74 @@ const dropRemove = (e:any) => {
 </script>
 
 <template>
-  <div v-if="!locked" class="app" :class="{ dark, shooting }">
-    <div id="phone-case" :style="caseStyle">
-      <div id="phone-case-inner">
-        <div class="nav">
+  <div
+   v-if="!locked"
+   class="photo select-none m-0 h-100vh w-100vw bg-dark-400 font-mono font-thin text-[var(--theme-foreground)]"
+   :class="{ dark, shooting }"
+  >
+    <div
+     id="phone-case"
+     :style="caseStyle"
+     class="bg-[var(--theme-background)] h-100vh overflow-y-auto overflow-x-hidden relative left-1/2 -translate-x-2/4 scrollbar-none [&::-webkit-scrollbar]:block [&::-webkit-scrollbar]:w-0px"
+    >
+      <div
+       id="phone-case-inner"
+       class="bg-[var(--theme-background)]"
+      >
+        <div class="mb-0.3rem [&>*]:m-auto-0 grid grid-cols-auto">
           <!-- header -->
-          <div v-if="width > 300" class="header">
-            <span class="flex items-center justify-center">
-              <div class="i-carbon-application" />
+          <div
+           v-if="width > 300"
+           class="p-1.3rem text-1.3rem font-thin leading-1.3rem"
+          >
+            <span
+             class="flex items-center justify-start"
+            >
               Photo
             </span>
             <b>Planner</b>
           </div>
           <!-- buttons -->
-          <div v-show="!shooting" class="buttons">
-            <button type="button" class="icon button" title="Take Screenshot" @click="shoot">
+          <div
+           v-show="!shooting"
+           class="px-0 py-4 [&:first-chile]:p-1rem"
+          >
+            <IconButton title="Take Screenshot" @click="shoot">
               <div class="i-mdi-light-camera" />
-            </button>
+            </IconButton>
 
-            <button v-if="isDesktop && !inPopup" type="button" class="icon button" title="Popup" @click="openPopup">
+            <IconButton v-if="isDesktop && !inPopup" title="Popup" @click="openPopup">
               <div class="i-mdi-light-arrange-send-backward" />
-            </button>
+            </IconButton>
 
-            <button type="button" class="icon button" title="New Post" @click="addFront">
+            <IconButton title="New Post" @click="addFront">
               <div class="i-mdi-light-plus-circle" />
-            </button>
+            </IconButton>
 
-            <button type="button" class="icon button" :title="dark ? 'Light Mode' : 'Dark Mode'" @click="toggleDark">
+            <IconButton :title="dark ? 'Light Mode' : 'Dark Mode'" @click="toggleDark">
               <div :class="[dark ? 'i-mdi-light-lightbulb-on' : 'i-mdi-light-lightbulb']" />
-            </button>
+            </IconButton>
 
-            <button type="button" class="icon button" title="Toggle Gap" @click="toggleGap">
+            <IconButton title="Toggle Gap" @click="toggleGap">
               <div :class="[gap ? 'i-mdi-light-border-all' : 'i-mdi-light-border-outside']" />
-            </button>
+            </IconButton>
 
-            <button type="button" class="icon button" title="Switch mode" @click="switchMode">
+            <IconButton title="Switch mode" @click="switchMode">
               <div :class="[imageMode === 0 ? 'i-mdi-light-picture' : imageMode === 1 ? 'i-mdi-light-flask-empty' : 'i-mdi-light-flask']" />
-            </button>
+            </IconButton>
 
-            <button type="button" class="icon button" title="Switch Tabs" @click="switchTab">
+            <IconButton title="Switch Tabs" @click="switchTab">
               <div class="i-mdi-light-shape-circle" />
-              <span class="number font-bold">{{ tab + 1 }}</span>
-            </button>
+              <span
+               class="absolute top-1/2 left-40% text-0.8rem select-none -translate-x-2/4 -translate-y-2/4 -translate-x-px text-center"
+              >
+                {{ tab + 1 }}
+              </span>
+            </IconButton>
           </div>
         </div>
 
-        <div class="grid" :style="{ gridGap: `${gap}px` }">
+        <div class="grid grid-cols-1fr" :style="{ gridGap: `${gap}px` }">
           <Post
             v-for="(post, idx) in posts"
             :key="idx"
@@ -282,21 +304,8 @@ const dropRemove = (e:any) => {
   --theme-background: #fff;
   --theme-shadow: rgba(0,0,0,0.031);
 }
-html,
-body,
-.app {
-  user-select: none;
-  margin: 0;
-  height: 100vh;
-  width: 100vw;
-  background: #222;
-  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  font-weight: 100;
-}
-.app {
-  color: var(--theme-foreground);
-}
-.app.dark {
+
+.photo.dark {
   --theme-foreground: #fff;
   --theme-background: #000;
   --theme-foreground-fade: rgba(255,255,255,0.533);
@@ -325,69 +334,7 @@ a {
   color: var(--theme-background);
   font-weight: normal;
 }
-.icon.button {
-  display: inline-block;
-  font-size: 1.4rem;
-  cursor: pointer;
-  padding: 0.3rem;
-  position: relative;
-  background: none;
-  border: none;
-  outline: none;
-  border-radius: 2px;
-  text-align: center;
-  line-height: 1.4rem;
-  color: inherit;
-}
-.icon.button:hover {
-  background: var(--theme-shadow);
-}
-.icon.button .number {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  text-align: center;
-  transform: translate(-50%, -50%) translateX(-1px);
-  font-size: 0.8rem;
-  user-select: none;
-}
-#phone-case-inner {
-  background: var(--theme-background);
-}
-#phone-case {
-  background: var(--theme-background);
-  height: 100vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-width: none;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-}
-#phone-case::-webkit-scrollbar {
-  display: block;
-  width: 0px;
-}
-#phone-case .nav {
-  margin-bottom: 0.3rem;
-  display: grid;
-  grid-template-columns: max-content auto;
-}
-#phone-case .nav > * {
-  margin: auto 0;
-}
-#phone-case .nav .header {
-  padding: 1.3rem;
-  font-size: 1.3rem;
-  font-weight: 100;
-  line-height: 1.3rem;
-}
-#phone-case .nav .buttons {
-  padding: 1rem 0;
-}
-#phone-case .nav .buttons:first-child {
-  padding: 1rem;
-}
+
 #phone-case .footer {
   padding: 1rem;
   font-size: 0.9rem;
@@ -396,10 +343,7 @@ a {
 #phone-case .footer .powered {
   font-size: 0.8rem;
 }
-#phone-case .grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
+
 .trashbin {
   position: fixed;
   bottom: 0;
