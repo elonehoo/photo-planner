@@ -1,54 +1,47 @@
 {
-    "compilerOptions": {
-        "baseUrl": ".",
-        "module": "ESNext",
-        "target": "es2016",
-        "lib": [
-            "DOM",
-            "ESNext"
-        ],
-        "strict": true,
-        "jsx": "preserve",
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "noUnusedLocals": true,
-        "strictNullChecks": true,
-        "forceConsistentCasingInFileNames": true,
-        "types": [
-            "vite/client",
-            "vite-plugin-pages/client",
-            "vitest/globals"
-        ],
-        "paths": {
-            "~components/*": [
-                "src/components/*"
-            ],
-            "~composables/*": [
-                "src/composables/*"
-            ],
-            "~pages/*": [
-                "src/pages/*"
-            ],
-            "~styles/*": [
-                "src/styles/*"
-            ],
-            "~/*": [
-                "src/*"
-            ],
-            "~buttons/*": [
-                "src/components/buttons/*"
-            ]
-        }
-    },
-    "exclude": [
-        "dist",
-        "node_modules"
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "ESNext",
+    "target": "es2016",
+    "lib": [
+      "DOM",
+      "ESNext"
     ],
-    "references": [
-        {
-            "path": "./tsconfig.node.json"
-        }
-    ]
+    "strict": true,
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": [
+      "vite/client",
+      "vitest/globals"
+    ],
+    "paths": {
+      "~components/*": [
+        "src/components/*"
+      ],
+      "~styles/*": [
+        "src/styles/*"
+      ],
+      "~/*": [
+        "src/*"
+      ],
+      "~composition/*": [
+        "src/composition/*"
+      ]
+    }
+  },
+  "exclude": [
+    "dist",
+    "node_modules"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }
