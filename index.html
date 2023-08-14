@@ -11,6 +11,7 @@
 <body>
   <div id="app"></div>
   <script>
+    MobileDragDrop.polyfill({ holdToDrag: 500 });
     (function() {
       const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
       const setting = localStorage.getItem('color-schema') || 'auto'
