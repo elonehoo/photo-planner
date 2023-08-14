@@ -1,18 +1,18 @@
-import { STORE_PREFIX, DEFAULT_POSTS, DEFAULT_IMAGES } from './constant'
+import { DEFAULT_IMAGES, DEFAULT_POSTS, STORE_PREFIX } from './constant'
 
 export function openDb() {
   return new Promise((resolve) => {
     const request = window.indexedDB.open(STORE_PREFIX, 1)
 
-    request.onerror = function(event) {
+    request.onerror = function (event) {
       alert(`Failed to open db:\n${event.toString()}`)
     }
 
-    request.onsuccess = function(event) {
+    request.onsuccess = function (event) {
       resolve(request.result)
     }
 
-    request.onupgradeneeded = function(event:any) {
+    request.onupgradeneeded = function (event: any) {
       const db = event.target.result
       const stores = []
       for (let i = 0; i < 5; i++) {

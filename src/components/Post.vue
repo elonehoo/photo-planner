@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import chroma from "chroma-js"
+import chroma from 'chroma-js'
 import { getColors } from '~composition/colors'
 import { getDataUrls } from '~composition/url'
 
@@ -8,13 +8,13 @@ const props = withDefaults(defineProps<{
   mode: number
   post: any
   shooting: boolean
-}>(),{
-  size:0,
-  mode:0,
+}>(), {
+  size: 0,
+  mode: 0,
   shooting: false,
-  post:{
-    url:''
-  }
+  post: {
+    url: '',
+  },
 })
 
 const emit = defineEmits(['upload'])
@@ -24,7 +24,7 @@ const colors = ref([])
 onMounted(() => {
   watch(
     () => props.post.url,
-    async() => {
+    async () => {
       if (props.post.url)
         colors.value = await getColors(props.post.url, 5)
       else
@@ -35,7 +35,7 @@ onMounted(() => {
 })
 
 const style = computed(() => {
-  const obj:any = {
+  const obj: any = {
     width: `${props.size}px`,
     height: `${props.size}px`,
   }
@@ -87,7 +87,7 @@ const loaded = ref(false)
 
 const imageStyle = ref({})
 
-const onLoad = (e:any) => {
+function onLoad(e: any) {
   loaded.value = true
   if (e.target.height > e.target.width)
     imageStyle.value = { width: '100%' }
@@ -95,7 +95,7 @@ const onLoad = (e:any) => {
     imageStyle.value = { height: '100%' }
 }
 
-const onImageSelect = async(e:any) => {
+async function onImageSelect(e: any) {
   const urls = await getDataUrls(e.target.files)
   emit('upload', urls)
 }
@@ -115,7 +115,7 @@ const onImageSelect = async(e:any) => {
       >
       <pre v-if="mode === 1" class="info" :style="infoStyle">{{ info }}</pre>
       <div v-if="mode === 2" class="dots" :style="dotsStyle">
-        <div v-for="c of colors.slice(1)" :key="c" class="dot" :style="{background:c}" />
+        <div v-for="c of colors.slice(1)" :key="c" class="dot" :style="{ background: c }" />
       </div>
     </slot>
     <img

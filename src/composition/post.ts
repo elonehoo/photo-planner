@@ -1,6 +1,6 @@
 import { DEFAULT_POSTS } from './constant'
 
-export function loadPosts(db:any, tab:number = 0) {
+export function loadPosts(db: any, tab: number = 0) {
   return new Promise((resolve) => {
     const store = db.transaction([`posts-${tab}`], 'readwrite')
       .objectStore(`posts-${tab}`)
@@ -12,13 +12,13 @@ export function loadPosts(db:any, tab:number = 0) {
           .fill(null)
           .map((_, id) => ({ id, url: '' }))
       }
-      posts.sort((a:any, b:any) => a.id - b.id)
+      posts.sort((a: any, b: any) => a.id - b.id)
       resolve(posts)
     }
   })
 }
 
-export function savePosts(db:any, posts:any[] = [], tab:number = 0) {
+export function savePosts(db: any, posts: any[] = [], tab: number = 0) {
   const store = db.transaction([`posts-${tab}`], 'readwrite')
     .objectStore(`posts-${tab}`)
 

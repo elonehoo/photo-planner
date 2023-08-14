@@ -3,16 +3,16 @@ import { takeScreenshot } from '~composition/photo'
 import { popup } from '~composition/popup'
 import { loadPosts, savePosts } from '~composition/post'
 import { openDb } from '~composition/db'
-import { PHONE_RATIO, CONFIG_PREFIX, TOAST_TIMEOUT } from '~composition/constant'
+import { CONFIG_PREFIX, PHONE_RATIO, TOAST_TIMEOUT } from '~composition/constant'
 
 useHead({
   title: import.meta.env.VITE_APP_TITLE,
 })
 
-let db:any
-let toastTimer:any
+let db: any
+let toastTimer: any
 
-openDb().then(async(i) => {
+openDb().then(async (i) => {
   db = i
   window.db = db
   posts.value = await loadPosts(db, tab.value)
@@ -53,7 +53,7 @@ const size = computed(() => {
   return (caseWidth.value - gap.value * 2) / 3
 })
 
-const shoot = () => {
+function shoot() {
   shooting.value = true
   toast.value = 'Taking Screenshot'
   nextTick(() => {
@@ -62,32 +62,32 @@ const shoot = () => {
   })
 }
 
-const openPopup = async() => {
+async function openPopup() {
   locked.value = true
   toast.value = 'Poped'
   await popup(location.href, 'foto-rehearse', caseWidth.value, height.value)
   location.reload()
 }
 
-const addFront = () => {
+function addFront() {
   posts.value.unshift({ url: '' })
 }
 
-const toggleDark = () => {
+function toggleDark() {
   dark.value = !dark.value
   toast.value = dark.value ? 'Dark mode' : 'Light mode'
 }
 
-const toggleGap = () => {
+function toggleGap() {
   gap.value = gap.value ? 0 : 3
   toast.value = gap.value ? 'Gap on' : 'Gap off'
 }
-const switchMode = () => {
+function switchMode() {
   imageMode.value = (imageMode.value + 1) % 3
   toast.value = ['Image mode', 'Color mode', 'Pattle mode'][imageMode.value]
 }
 
-const switchTab = () => {
+function switchTab() {
   tab.value = (tab.value + 1) % 3
   toast.value = `Tab ${tab.value + 1}`
 }
@@ -101,10 +101,9 @@ watch(
   },
 )
 
-
 watch(
   tab,
-  async() => {
+  async () => {
     posts.value = await loadPosts(db, tab.value)
   },
 )
@@ -123,22 +122,22 @@ watch(
 
 const dragging = ref(false)
 
-const drop = (to:any, e:any) => {
+function drop(to: any, e: any) {
   dragging.value = false
   const from = +e.dataTransfer.getData('idx')
   posts.value.splice(to, 0, posts.value.splice(from, 1)[0])
 }
 
-const dragend = () => {
+function dragend() {
   dragging.value = false
 }
 
-const allowDrop = (e:any) => {
+function allowDrop(e: any) {
   e.preventDefault()
   return false
 }
 
-const drag = (idx:any, e:any) => {
+function drag(idx: any, e: any) {
   dragging.value = true
   e.dataTransfer.setData('idx', idx)
   try {
@@ -147,7 +146,7 @@ const drag = (idx:any, e:any) => {
   catch {}
 }
 
-const handleUploaded = (index:any, urls:any) => {
+function handleUploaded(index: any, urls: any) {
   for (let i = 0; i < urls.length; i++) {
     // append to tail
     if (!posts.value[i + index])
@@ -161,16 +160,15 @@ const handleUploaded = (index:any, urls:any) => {
   }
 }
 
-const add = () => {
+function add() {
   posts.value.push({ url: '' })
 }
 </script>
 
 <template>
-  <div v-if="!locked" class="app" :class="{dark, shooting}">
+  <div v-if="!locked" class="app" :class="{ dark, shooting }">
     <div id="phone-case" :style="caseStyle">
       <div id="phone-case-inner">
-
         <div class="nav">
           <!-- header -->
           <div v-if="width > 300" class="header">
@@ -218,12 +216,12 @@ const add = () => {
             :mode="imageMode"
             :shooting="shooting"
             :draggable="true"
-            @drop.native="(e:any)=>drop(idx, e)"
+            @drop.native="(e:any) => drop(idx, e)"
             @dragend.native="dragend"
             @dragover.native="allowDrop"
             @dragenter.native="allowDrop"
-            @dragstart.native="(e:any)=>drag(idx, e)"
-            @upload="(urls:any)=>handleUploaded(idx,urls)"
+            @dragstart.native="(e:any) => drag(idx, e)"
+            @upload="(urls:any) => handleUploaded(idx, urls)"
           />
           <post
             v-show="!shooting"
@@ -246,7 +244,6 @@ const add = () => {
             source on <a href="https://github.com/elonehoo/photo-planner">Github</a>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -435,5 +432,4 @@ a {
   border-radius: 0.3rem;
   border: 1px solid var(--theme-background);
 }
-
 </style>

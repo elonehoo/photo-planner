@@ -70,36 +70,36 @@ export default defineConfig({
 
     // https://github.com/elonehoo/unplugin-deploy-info
     DeployInfo({
-      info:[
+      info: [
         {
           name: 'Vue Docs',
-          message: 'https://vuejs.org'
+          message: 'https://vuejs.org',
         },
         {
           name: 'Vite Docs',
-          message: 'https://vitejs.dev'
+          message: 'https://vitejs.dev',
         },
         {
           name: 'pinia Docs',
-          message: 'https://pinia.vuejs.org'
+          message: 'https://pinia.vuejs.org',
         },
         {
           name: 'Router Docs',
-          message: 'https://router.vuejs.org'
+          message: 'https://router.vuejs.org',
         },
         {
           name: 'VueUse Docs',
-          message: 'https://vueuse.org'
+          message: 'https://vueuse.org',
         },
         {
           name: 'Unocss Docs',
-          message: 'https://unocss.dev/interactive'
+          message: 'https://unocss.dev/interactive',
         },
         {
           name: 'Vitest Docs',
           message: 'https://vitest.dev',
         },
-      ]
-    })
+      ],
+    }),
   ],
 })

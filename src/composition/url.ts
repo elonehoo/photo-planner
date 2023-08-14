@@ -1,8 +1,8 @@
-export function resizedataURL(url:any, MAX_WIDTH = 512, MAX_HEIGHT = 512) {
+export function resizedataURL(url: any, MAX_WIDTH = 512, MAX_HEIGHT = 512) {
   const img = document.createElement('img')
 
   return new Promise((resolve) => {
-    img.onload = function() {
+    img.onload = function () {
       // We create a canvas and get its context.
       const canvas = document.createElement('canvas')
       const ctx = canvas.getContext('2d')
@@ -37,14 +37,14 @@ export function resizedataURL(url:any, MAX_WIDTH = 512, MAX_HEIGHT = 512) {
   })
 }
 
-export async function getDataUrls(files:any) {
+export async function getDataUrls(files: any) {
   return await Promise.all(
     Array
       .from(files)
-      .map((file:any) => {
+      .map((file: any) => {
         return new Promise((resolve) => {
           const reader = new FileReader()
-          reader.addEventListener('load', async() => {
+          reader.addEventListener('load', async () => {
             const url = reader.result
             const resized = await resizedataURL(url, 512, 512)
             resolve(resized)
