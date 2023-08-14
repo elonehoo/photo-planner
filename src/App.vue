@@ -163,6 +163,12 @@ function handleUploaded(index: any, urls: any) {
 function add() {
   posts.value.push({ url: '' })
 }
+
+const dropRemove = (e:any) => {
+  dragging.value = false
+  const from = +e.dataTransfer.getData('idx')
+  posts.value.splice(from, 1)
+}
 </script>
 
 <template>
@@ -245,6 +251,20 @@ function add() {
           </div>
         </div>
       </div>
+    </div>
+    <div class="toast" :class="{ active: !!toast }">
+      {{ toast }}
+    </div>
+    <div
+      v-show="!shooting"
+      class="trashbin"
+      :class="{active:dragging}"
+      :style="caseStyle"
+      @drop.native="dropRemove"
+      @dragenter.native="allowDrop"
+      @dragover.native="allowDrop"
+    >
+      Drop here to Remove
     </div>
   </div>
 </template>
