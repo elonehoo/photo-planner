@@ -6,10 +6,5 @@ useHead({
 </script>
 
 <template>
-  <div
-   class="app"
-   :class="{dark, shooting}"
-  >
-    <RouterView />
-  </div>
+  <div>hello</div>
 </template>

@@ -5,7 +5,6 @@ import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import DeployInfo from 'unplugin-deploy-info/vite'
 import UnoCss from 'unocss/vite'
-import Pages from 'vite-plugin-pages'
 import Inspector from 'vite-inspector'
 import Alias from 'vite-plugin-alias'
 import PKG from 'vite-plugin-package-configs'
@@ -27,14 +26,10 @@ export default defineConfig({
     // https://github.com/vitejs/vite-plugin-vue
     Vue(),
 
-    // https://github.com/hannoeru/vite-plugin-pages
-    Pages(),
-
     // https://github.com/elonehoo/unplugin-auto-import-api
     AutoImport({
       imports: [
         'vue',
-        'vue-router',
         '@vueuse/core',
         '@vueuse/head',
         'vitest',
