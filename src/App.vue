@@ -178,7 +178,11 @@ const dropRemove = (e:any) => {
         <div class="nav">
           <!-- header -->
           <div v-if="width > 300" class="header">
-            Photo<br><b>Planner</b>
+            <span class="flex items-center justify-center">
+              <div class="i-carbon-application" />
+              Photo
+            </span>
+            <b>Planner</b>
           </div>
           <!-- buttons -->
           <div v-show="!shooting" class="buttons">
