@@ -61,7 +61,7 @@ const info = computed(() => {
   + `hue ${hue.toFixed(1)}°`
 })
 
-const infoStyle = computed(() => {
+const infoStyle = computed<any>(() => {
   if (!colors.value[0])
     return {}
   const color = chroma(colors.value[0])
@@ -103,9 +103,8 @@ async function onImageSelect(e: any) {
 
 <template>
   <div
-   ref="frame"
-   class="relative bg-no-repeat bg-center bg-cover overflow-hidden w-full [background:var(--theme-shadow)]"
-   :style="style"
+    class="relative bg-no-repeat bg-center bg-cover overflow-hidden w-full [background:var(--theme-shadow)]"
+    :style="style"
   >
     <slot>
       <input

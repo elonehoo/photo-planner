@@ -5,10 +5,11 @@ export function openDb() {
     const request = window.indexedDB.open(STORE_PREFIX, 1)
 
     request.onerror = function (event) {
+      /* eslint-disable no-alert */
       alert(`Failed to open db:\n${event.toString()}`)
     }
 
-    request.onsuccess = function (event) {
+    request.onsuccess = function () {
       resolve(request.result)
     }
 

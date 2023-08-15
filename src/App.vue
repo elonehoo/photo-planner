@@ -12,12 +12,6 @@ useHead({
 let db: any
 let toastTimer: any
 
-openDb().then(async (i) => {
-  db = i
-  window.db = db
-  posts.value = await loadPosts(db, tab.value)
-})
-
 const tab = useStorage(`${CONFIG_PREFIX}-tab`, 0)
 const dark = useStorage(`${CONFIG_PREFIX}-dark`, false)
 const gap = useStorage(`${CONFIG_PREFIX}-gap`, 3)
@@ -26,6 +20,12 @@ const locked = ref(false)
 const inPopup = ref(window.name === 'photo-planner')
 const posts = ref<any>([])
 const toast = ref('')
+
+openDb().then(async (i) => {
+  db = i
+  window.db = db
+  posts.value = await loadPosts(db, tab.value)
+})
 
 // 0: photo, 1: thief, 2: pattele
 const imageMode = ref<number>(0)
@@ -164,7 +164,7 @@ function add() {
   posts.value.push({ url: '' })
 }
 
-const dropRemove = (e:any) => {
+function dropRemove(e: any) {
   dragging.value = false
   const from = +e.dataTransfer.getData('idx')
   posts.value.splice(from, 1)
@@ -173,27 +173,27 @@ const dropRemove = (e:any) => {
 
 <template>
   <div
-   v-if="!locked"
-   class="photo select-none m-0 h-100vh w-100vw bg-dark-400 font-mono font-thin text-[var(--theme-foreground)]"
-   :class="{ dark, shooting }"
+    v-if="!locked"
+    class="photo select-none m-0 h-100vh w-100vw bg-dark-400 font-mono font-thin text-[var(--theme-foreground)]"
+    :class="{ dark, shooting }"
   >
     <div
-     id="phone-case"
-     :style="caseStyle"
-     class="bg-[var(--theme-background)] h-100vh overflow-y-auto overflow-x-hidden relative left-1/2 -translate-x-2/4 scrollbar-none [&::-webkit-scrollbar]:block [&::-webkit-scrollbar]:w-0px"
+      id="phone-case"
+      :style="caseStyle"
+      class="bg-[var(--theme-background)] h-100vh overflow-y-auto overflow-x-hidden relative left-1/2 -translate-x-2/4 scrollbar-none [&::-webkit-scrollbar]:block [&::-webkit-scrollbar]:w-0px"
     >
       <div
-       id="phone-case-inner"
-       class="bg-[var(--theme-background)]"
+        id="phone-case-inner"
+        class="bg-[var(--theme-background)]"
       >
         <div class="mb-0.3rem [&>*]:m-auto-0 grid grid-cols-auto">
           <!-- header -->
           <div
-           v-if="width > 300"
-           class="p-1.3rem text-1.3rem font-thin leading-1.3rem"
+            v-if="width > 300"
+            class="p-1.3rem text-1.3rem font-thin leading-1.3rem"
           >
             <span
-             class="flex items-center justify-start"
+              class="flex items-center justify-start"
             >
               Photo
             </span>
@@ -201,8 +201,8 @@ const dropRemove = (e:any) => {
           </div>
           <!-- buttons -->
           <div
-           v-show="!shooting"
-           class="px-0 py-4 [&:first-chile]:p-1rem"
+            v-show="!shooting"
+            class="px-0 py-4 [&:first-chile]:p-1rem"
           >
             <IconButton title="Take Screenshot" @click="shoot">
               <div class="i-mdi-light-camera" />
@@ -231,7 +231,7 @@ const dropRemove = (e:any) => {
             <IconButton title="Switch Tabs" @click="switchTab">
               <div class="i-mdi-light-shape-circle" />
               <span
-               class="absolute top-1/2 left-40% text-0.8rem select-none -translate-x-2/4 -translate-y-2/4 -translate-x-px text-center"
+                class="absolute top-1/2 left-40% text-0.8rem select-none -translate-x-2/4 -translate-y-2/4 -translate-x-px text-center"
               >
                 {{ tab + 1 }}
               </span>
@@ -248,17 +248,17 @@ const dropRemove = (e:any) => {
             :mode="imageMode"
             :shooting="shooting"
             :draggable="true"
-            @drop.native="(e:any) => drop(idx, e)"
-            @dragend.native="dragend"
-            @dragover.native="allowDrop"
-            @dragenter.native="allowDrop"
-            @dragstart.native="(e:any) => drag(idx, e)"
+            @drop="(e:any) => drop(idx, e)"
+            @dragend="dragend"
+            @dragover="allowDrop"
+            @dragenter="allowDrop"
+            @dragstart="(e:any) => drag(idx, e)"
             @upload="(urls:any) => handleUploaded(idx, urls)"
           />
           <post
             v-show="!shooting"
             :size="size"
-            @click.native="add"
+            @click="add"
           >
             <div class="absolute text-5rem opacity-10 -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2">
               <div class="i-mdi-light-plus-circle w-1em h-1em" />
@@ -279,22 +279,21 @@ const dropRemove = (e:any) => {
       </div>
     </div>
     <div
-     class="fixed bottom-20vh left-1/2 -translate-x-2/4 translate-y-full min-w-200px text-center duration-0.2s ease-in-out pointer-events-none opacity-0 text-1.1rem text-[var(--theme-foregroud)] px-4 py-0.7rem [&::before]:content-[''] [&::before]:absolute [&::before]:opacity-70 [&::before]:z--1 [&::before]:rounded-0.3rem [&::before]:inset-0 [&::before]:[background:var(--theme-background)] [&::after]:content-[''] [&::after]:absolute [&::after]:z-[-1] [&::after]:border [&::after]:border-[color:var(--theme-background)] [&::after]:rounded-[0.3rem] [&::after]:border-solid [&::after]:inset-0"
-     :class="{ 'op-100!': !!toast }"
+      class="fixed bottom-20vh left-1/2 -translate-x-2/4 translate-y-full min-w-200px text-center duration-0.2s ease-in-out pointer-events-none opacity-0 text-1.1rem text-[var(--theme-foregroud)] px-4 py-0.7rem [&::before]:content-[''] [&::before]:absolute [&::before]:opacity-70 [&::before]:z--1 [&::before]:rounded-0.3rem [&::before]:inset-0 [&::before]:[background:var(--theme-background)] [&::after]:content-[''] [&::after]:absolute [&::after]:z-[-1] [&::after]:border [&::after]:border-[color:var(--theme-background)] [&::after]:rounded-[0.3rem] [&::after]:border-solid [&::after]:inset-0"
+      :class="{ 'op-100!': !!toast }"
     >
       {{ toast }}
     </div>
     <div
       v-show="!shooting"
       class="fixed text-white duration-200 ease-in -translate-x-2/4 translate-y-full text-center opacity-100 px-0 py-4 left-1/2 right-0 bottom-0 [background:#bd3a3a]"
-      :class="{'op-100! -translate-x-2/4! translate-y-0!':dragging}"
+      :class="{ 'op-100! -translate-x-2/4! translate-y-0!': dragging }"
       :style="caseStyle"
-      @drop.native="dropRemove"
-      @dragenter.native="allowDrop"
-      @dragover.native="allowDrop"
+      @drop="dropRemove"
+      @dragenter="allowDrop"
+      @dragover="allowDrop"
     >
       Drop here to Remove
     </div>
   </div>
 </template>
-
