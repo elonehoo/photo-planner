@@ -266,8 +266,8 @@ const dropRemove = (e:any) => {
           </post>
         </div>
 
-        <div v-if="!shooting" class="footer">
-          <div class="powered">
+        <div v-if="!shooting" class="p-1rem text-0.9rem text-[var(--theme-foreground-fade)]">
+          <div class="text-0.8rem">
             powered by
             <a href="https://github.com/vitejs/vite">vite</a>
             ,
@@ -278,13 +278,16 @@ const dropRemove = (e:any) => {
         </div>
       </div>
     </div>
-    <div class="toast" :class="{ active: !!toast }">
+    <div
+     class="fixed bottom-20vh left-1/2 -translate-x-2/4 translate-y-full min-w-200px text-center duration-0.2s ease-in-out pointer-events-none opacity-0 text-1.1rem text-[var(--theme-foregroud)] px-4 py-0.7rem [&::before]:content-[''] [&::before]:absolute [&::before]:opacity-70 [&::before]:z--1 [&::before]:rounded-0.3rem [&::before]:inset-0 [&::before]:[background:var(--theme-background)] [&::after]:content-[''] [&::after]:absolute [&::after]:z-[-1] [&::after]:border [&::after]:border-[color:var(--theme-background)] [&::after]:rounded-[0.3rem] [&::after]:border-solid [&::after]:inset-0"
+     :class="{ 'op-100!': !!toast }"
+    >
       {{ toast }}
     </div>
     <div
       v-show="!shooting"
-      class="trashbin"
-      :class="{active:dragging}"
+      class="fixed text-white duration-200 ease-in -translate-x-2/4 translate-y-full text-center opacity-100 px-0 py-4 left-1/2 right-0 bottom-0 [background:#bd3a3a]"
+      :class="{'op-100! -translate-x-2/4! translate-y-0!':dragging}"
       :style="caseStyle"
       @drop.native="dropRemove"
       @dragenter.native="allowDrop"
@@ -295,109 +298,3 @@ const dropRemove = (e:any) => {
   </div>
 </template>
 
-<style>
-:root {
-  --theme-primary: #d37070;
-  --post-width: 100px;
-  --theme-foreground: rgba(0,0,0,0.867);
-  --theme-foreground-fade: rgba(0,0,0,0.4);
-  --theme-background: #fff;
-  --theme-shadow: rgba(0,0,0,0.031);
-}
-
-.photo.dark {
-  --theme-foreground: #fff;
-  --theme-background: #000;
-  --theme-foreground-fade: rgba(255,255,255,0.533);
-  --theme-shadow: rgba(255,255,255,0.094);
-}
-a {
-  text-decoration: none !important;
-  color: var(--theme-primary) !important;
-}
-.tabs {
-  padding: 0.5rem 1rem;
-}
-.tabs .tab {
-  padding: 0.5rem;
-  display: inline-block;
-  color: var(--theme-primary);
-  cursor: pointer;
-  margin: 0 0.1rem;
-  width: 0.8rem;
-  height: 0.8rem;
-  line-height: 0.8rem;
-  text-align: center;
-}
-.tabs .tab.active {
-  background: var(--theme-primary);
-  color: var(--theme-background);
-  font-weight: normal;
-}
-
-#phone-case .footer {
-  padding: 1rem;
-  font-size: 0.9rem;
-  color: var(--theme-foreground-fade);
-}
-#phone-case .footer .powered {
-  font-size: 0.8rem;
-}
-
-.trashbin {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  right: 0;
-  padding: 1rem 0;
-  background: #bd3a3a;
-  color: #fff;
-  transition: 0.2s ease-in;
-  transform: translate(-50%, 100%);
-  text-align: center;
-  opacity: 1;
-}
-.trashbin.active {
-  transform: translate(-50%, 0);
-}
-.toast {
-  position: fixed;
-  bottom: 20vh;
-  left: 50%;
-  transform: translate(-50%, 100%);
-  padding: 0.7rem 1rem;
-  min-width: 200px;
-  text-align: center;
-  transition: 0.2s ease-in-out;
-  pointer-events: none;
-  opacity: 0;
-  font-size: 1.1rem;
-  color: var(--theme-foregroud);
-}
-.toast.active {
-  opacity: 1;
-}
-.toast::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0.7;
-  z-index: -1;
-  border-radius: 0.3rem;
-  background: var(--theme-background);
-}
-.toast::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  border-radius: 0.3rem;
-  border: 1px solid var(--theme-background);
-}
-</style>
