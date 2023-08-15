@@ -1,0 +1,19 @@
+:root {
+  --theme-primary: #d37070;
+  --post-width: 100px;
+  --theme-foreground: rgba(0,0,0,0.867);
+  --theme-foreground-fade: rgba(0,0,0,0.4);
+  --theme-background: #fff;
+  --theme-shadow: rgba(0,0,0,0.031);
+}
+
+.photo.dark {
+  --theme-foreground: #fff;
+  --theme-background: #000;
+  --theme-foreground-fade: rgba(255,255,255,0.533);
+  --theme-shadow: rgba(255,255,255,0.094);
+}
+a {
+  text-decoration: none !important;
+  color: var(--theme-primary) !important;
+}

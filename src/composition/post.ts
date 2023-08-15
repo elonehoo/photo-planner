@@ -1,6 +1,6 @@
 import { DEFAULT_POSTS } from './constant'
 
-export function loadPosts(db: any, tab: number = 0) {
+export function loadPosts(db: any, tab: number = 0): any {
   return new Promise((resolve) => {
     const store = db.transaction([`posts-${tab}`], 'readwrite')
       .objectStore(`posts-${tab}`)
@@ -8,6 +8,7 @@ export function loadPosts(db: any, tab: number = 0) {
     request.onsuccess = () => {
       let posts = request.result
       if (!posts || !posts.length) {
+        /* eslint-disable unicorn/no-new-array */
         posts = new Array(DEFAULT_POSTS)
           .fill(null)
           .map((_, id) => ({ id, url: '' }))
