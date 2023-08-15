@@ -4,10 +4,10 @@ import { getColors } from '~composition/colors'
 import { getDataUrls } from '~composition/url'
 
 const props = withDefaults(defineProps<{
-  size: number
-  mode: number
-  post: any
-  shooting: boolean
+  size?: number
+  mode?: number
+  post?: any
+  shooting?: boolean
 }>(), {
   size: 0,
   mode: 0,
@@ -102,85 +102,32 @@ async function onImageSelect(e: any) {
 </script>
 
 <template>
-  <div ref="frame" class="frame" :style="style">
+  <div
+   ref="frame"
+   class="relative bg-no-repeat bg-center bg-cover overflow-hidden w-full [background:var(--theme-shadow)]"
+   :style="style"
+  >
     <slot>
       <input
         v-if="!post.url || mode === 0"
-        class="upload"
+        class="absolute opacity-0 w-full inset-0"
         type="file"
         multiple
         accept="image/*"
         title=" "
         @change="onImageSelect"
       >
-      <pre v-if="mode === 1" class="info" :style="infoStyle">{{ info }}</pre>
-      <div v-if="mode === 2" class="dots" :style="dotsStyle">
-        <div v-for="c of colors.slice(1)" :key="c" class="dot" :style="{ background: c }" />
+      <pre v-if="mode === 1" class="opacity-0 duration-200 ease-in m-0 p-4 hover:op-100" :style="infoStyle">{{ info }}</pre>
+      <div v-if="mode === 2" class="absolute grid grid-cols-[1fr_1fr_1fr_1fr] bottom-0 inset-x-0" :style="dotsStyle">
+        <div v-for="c of colors.slice(1)" :key="c" class="rounded-1/2" :style="{ background: c }" />
       </div>
     </slot>
     <img
       v-show="mode === 0 && loaded && post.url"
-      class="image"
+      class="absolute -translate-x-2/4 -translate-y-2/4 pointer-events-none left-2/4 top-2/4"
       :style="imageStyle"
       :src="post.url"
       @load="onLoad"
     >
   </div>
 </template>
-
-<style>
-.frame {
-  background: var(--theme-shadow);
-  position: relative;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  overflow: hidden;
-  width: 100%;
-}
-.frame .image {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-.frame .upload {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0;
-  width: 100%;
-}
-.frame .icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  font-size: 5rem;
-  opacity: 0.1;
-  transform: translate(-50%, -50%);
-}
-.frame .dots {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-.frame .dots .dot {
-  border-radius: 50%;
-}
-.frame .info {
-  font-family: 'Inconsolata', monospace;
-  padding: 1rem;
-  margin: 0;
-  opacity: 0;
-  transition: 0.2s ease-in;
-}
-.frame:hover .info {
-  opacity: 1;
-}
-</style>

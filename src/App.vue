@@ -260,7 +260,7 @@ const dropRemove = (e:any) => {
             :size="size"
             @click.native="add"
           >
-            <div class="icon">
+            <div class="absolute text-5rem opacity-10 -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2">
               <div class="i-mdi-light-plus-circle w-1em h-1em" />
             </div>
           </post>
