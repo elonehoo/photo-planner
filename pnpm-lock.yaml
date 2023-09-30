@@ -71,8 +71,8 @@ devDependencies:
     specifier: ^8.49.0
     version: 8.49.0
   happy-dom:
-    specifier: ^10.11.2
-    version: 10.11.2
+    specifier: ^12.4.0
+    version: 12.4.0
   typescript:
     specifier: ^5.2.2
     version: 5.2.2
@@ -105,7 +105,7 @@ devDependencies:
     version: 0.0.11
   vitest:
     specifier: ^0.34.4
-    version: 0.34.4(@vitest/ui@0.34.4)(happy-dom@10.11.2)
+    version: 0.34.4(@vitest/ui@0.34.4)(happy-dom@12.4.0)
   vue-tsc:
     specifier: ^1.8.11
     version: 1.8.11(typescript@5.2.2)
@@ -1813,7 +1813,7 @@ packages:
       magic-string: 0.30.1
       picocolors: 1.0.0
       std-env: 3.3.3
-      vitest: 0.34.4(@vitest/ui@0.34.4)(happy-dom@10.11.2)
+      vitest: 0.34.4(@vitest/ui@0.34.4)(happy-dom@12.4.0)
     dev: true
 
   /@vitest/expect@0.34.4:
@@ -1858,7 +1858,7 @@ packages:
       pathe: 1.1.1
       picocolors: 1.0.0
       sirv: 2.0.3
-      vitest: 0.34.4(@vitest/ui@0.34.4)(happy-dom@10.11.2)
+      vitest: 0.34.4(@vitest/ui@0.34.4)(happy-dom@12.4.0)
     dev: true
 
   /@vitest/utils@0.34.4:
@@ -2817,7 +2817,7 @@ packages:
       eslint: 8.49.0
       eslint-import-resolver-node: 0.3.7
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.4.1)(eslint-import-resolver-node@0.3.7)(eslint@8.49.0)
-      get-tsconfig: 4.6.2
+      get-tsconfig: 4.7.0
       is-glob: 4.0.3
       minimatch: 3.1.2
       resolve: 1.22.3
@@ -2840,7 +2840,7 @@ packages:
       eslint: 8.49.0
       eslint-import-resolver-node: 0.3.7
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.7.0)(eslint-import-resolver-node@0.3.7)(eslint@8.49.0)
-      get-tsconfig: 4.6.2
+      get-tsconfig: 4.7.0
       is-glob: 4.0.3
       minimatch: 3.1.2
       resolve: 1.22.3
@@ -3369,12 +3369,6 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /get-tsconfig@4.6.2:
-    resolution: {integrity: sha512-E5XrT4CbbXcXWy+1jChlZmrmCwd5KGx502kDCXJJ7y898TtWW9FwoG5HfOLVRKmlmDGkWN2HM9Ho+/Y8F0sJDg==}
-    dependencies:
-      resolve-pkg-maps: 1.0.0
-    dev: true
-
   /get-tsconfig@4.7.0:
     resolution: {integrity: sha512-pmjiZ7xtB8URYm74PlGJozDNyhvsVLUcpBa8DZBG3bWHwaHa9bPiRpiSfovw+fjhwONSCWKRyk+JQHEGZmMrzw==}
     dependencies:
@@ -3481,8 +3475,8 @@ packages:
       duplexer: 0.1.2
     dev: false
 
-  /happy-dom@10.11.2:
-    resolution: {integrity: sha512-rzgmLjLkhyaOdFEyU8CWXzbgyCyM7wJHLqhaoeEVSTyur1fjcUaiNTHx+D4CPaLvx16tGy+SBPd9TVnP/kzL3w==}
+  /happy-dom@12.4.0:
+    resolution: {integrity: sha512-I3MUV+70GG4UfPuPLATndGwSZcB1q0EdJtwFTiC5nCNLGQY5tPdloyIJdq94lgVjH537gLFmo8zJgDvqvP/FDw==}
     dependencies:
       css.escape: 1.5.1
       entities: 4.5.0
@@ -5194,7 +5188,7 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
 
-  /vitest@0.34.4(@vitest/ui@0.34.4)(happy-dom@10.11.2):
+  /vitest@0.34.4(@vitest/ui@0.34.4)(happy-dom@12.4.0):
     resolution: {integrity: sha512-SE/laOsB6995QlbSE6BtkpXDeVNLJc1u2LHRG/OpnN4RsRzM3GQm4nm3PQCK5OBtrsUqnhzLdnT7se3aeNGdlw==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -5239,7 +5233,7 @@ packages:
       cac: 6.7.14
       chai: 4.3.7
       debug: 4.3.4
-      happy-dom: 10.11.2
+      happy-dom: 12.4.0
       local-pkg: 0.4.3
       magic-string: 0.30.3
       pathe: 1.1.1
