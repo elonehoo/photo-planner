@@ -96,7 +96,8 @@ watch(
   posts,
   () => {
     savePosts(db, posts.value, tab.value)
-  }, {
+  },
+  {
     deep: true,
   },
 )
