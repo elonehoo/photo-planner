@@ -35,7 +35,7 @@
     "html2canvas": "^1.4.1",
     "mobile-drag-drop": "3.0.0-rc.0",
     "unocss": "^0.62.4",
-    "vue": "^3.5.7"
+    "vue": "^3.5.8"
   },
   "devDependencies": {
     "@antfu/eslint-config": "3.7.1",
