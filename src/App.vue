@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { CONFIG_PREFIX, PHONE_RATIO, TOAST_TIMEOUT } from '~composition/constant'
+import { openDb } from '~composition/db'
 import { takeScreenshot } from '~composition/photo'
 import { popup } from '~composition/popup'
 import { loadPosts, savePosts } from '~composition/post'
-import { openDb } from '~composition/db'
-import { CONFIG_PREFIX, PHONE_RATIO, TOAST_TIMEOUT } from '~composition/constant'
 
 useHead({
   title: import.meta.env.VITE_APP_TITLE,

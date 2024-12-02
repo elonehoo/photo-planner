@@ -1,5 +1,5 @@
-import html2canvas from 'html2canvas'
 import { saveAs } from 'file-saver'
+import html2canvas from 'html2canvas'
 
 export async function takeScreenshot(
   selector = '#phone-case-inner',
