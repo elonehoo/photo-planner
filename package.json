@@ -41,7 +41,7 @@
     "@antfu/eslint-config": "3.14.0",
     "@iconify-json/carbon": "^1.2.5",
     "@iconify-json/mdi-light": "^1.2.2",
-    "@types/chroma-js": "^2.4.5",
+    "@types/chroma-js": "^3.1.0",
     "@types/file-saver": "^2.0.7",
     "@types/node": "^22.10.7",
     "@vitejs/plugin-vue": "^5.2.1",
