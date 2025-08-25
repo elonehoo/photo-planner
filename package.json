@@ -52,7 +52,7 @@
     "eslint": "^9.34.0",
     "happy-dom": "^18.0.1",
     "typescript": "^5.9.2",
-    "unplugin-auto-import": "^19.3.0",
+    "unplugin-auto-import": "^20.0.0",
     "unplugin-deploy-info": "^0.0.3",
     "unplugin-vue-components": "^28.8.0",
     "vite": "^7.1.3",
