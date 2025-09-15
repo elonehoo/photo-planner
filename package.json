@@ -43,7 +43,7 @@
     "@iconify-json/mdi-light": "^1.2.2",
     "@types/chroma-js": "^3.1.1",
     "@types/file-saver": "^2.0.7",
-    "@types/node": "^22.18.1",
+    "@types/node": "^22.18.3",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vitest/coverage-v8": "^3.2.4",
     "@vitest/ui": "^3.2.4",
@@ -62,6 +62,6 @@
     "vite-plugin-classify": "^0.0.1",
     "vite-plugin-package-configs": "^0.0.12",
     "vitest": "^3.2.4",
-    "vue-tsc": "^3.0.6"
+    "vue-tsc": "^3.0.7"
   }
 }
