@@ -50,7 +50,7 @@
     "@vue/test-utils": "^2.4.6",
     "bumpp": "^10.2.3",
     "eslint": "^9.36.0",
-    "happy-dom": "^18.0.1",
+    "happy-dom": "^19.0.1",
     "typescript": "^5.9.2",
     "unplugin-auto-import": "^20.2.0",
     "unplugin-deploy-info": "^0.0.3",
