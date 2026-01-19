@@ -27,30 +27,30 @@
     "release": "bumpp package.json --commit --push --tag"
   },
   "dependencies": {
-    "@unocss/reset": "^66.5.12",
+    "@unocss/reset": "^66.6.0",
     "@vueuse/core": "^14.1.0",
     "@vueuse/head": "^2.0.0",
     "chroma-js": "^3.2.0",
     "file-saver": "^2.0.5",
     "html2canvas": "^1.4.1",
     "mobile-drag-drop": "3.0.0-rc.0",
-    "unocss": "^66.5.12",
+    "unocss": "^66.6.0",
     "vue": "^3.5.26"
   },
   "devDependencies": {
     "@antfu/eslint-config": "6.7.3",
-    "@iconify-json/carbon": "^1.2.16",
+    "@iconify-json/carbon": "^1.2.18",
     "@iconify-json/mdi-light": "^1.2.2",
     "@types/chroma-js": "^3.1.2",
     "@types/file-saver": "^2.0.7",
-    "@types/node": "^24.10.7",
+    "@types/node": "^24.10.9",
     "@vitejs/plugin-vue": "^6.0.3",
-    "@vitest/coverage-v8": "^4.0.16",
-    "@vitest/ui": "^4.0.16",
+    "@vitest/coverage-v8": "^4.0.17",
+    "@vitest/ui": "^4.0.17",
     "@vue/test-utils": "^2.4.6",
-    "bumpp": "^10.3.2",
+    "bumpp": "^10.4.0",
     "eslint": "^9.39.2",
-    "happy-dom": "^20.1.0",
+    "happy-dom": "^20.3.3",
     "typescript": "^5.9.3",
     "unplugin-auto-import": "^20.3.0",
     "unplugin-deploy-info": "^0.0.3",
@@ -61,7 +61,7 @@
     "vite-plugin-chai": "^0.0.2",
     "vite-plugin-classify": "^0.0.1",
     "vite-plugin-package-configs": "^0.0.12",
-    "vitest": "^4.0.16",
+    "vitest": "^4.0.17",
     "vue-tsc": "^3.2.2"
   }
 }
