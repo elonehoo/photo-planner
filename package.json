@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@unocss/reset": "^66.6.0",
-    "@vueuse/core": "^14.1.0",
+    "@vueuse/core": "^14.2.0",
     "@vueuse/head": "^2.0.0",
     "chroma-js": "^3.2.0",
     "file-saver": "^2.0.5",
@@ -50,7 +50,7 @@
     "@vue/test-utils": "^2.4.6",
     "bumpp": "^10.4.0",
     "eslint": "^9.39.2",
-    "happy-dom": "^20.3.9",
+    "happy-dom": "^20.4.0",
     "typescript": "^5.9.3",
     "unplugin-auto-import": "^21.0.0",
     "unplugin-deploy-info": "^0.0.3",
