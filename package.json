@@ -51,7 +51,7 @@
     "bumpp": "^11.0.0",
     "eslint": "^9.39.3",
     "happy-dom": "^20.7.0",
-    "typescript": "^6.0.2",
+    "typescript": "^7.0.2",
     "unplugin-auto-import": "^21.0.0",
     "unplugin-deploy-info": "^0.0.3",
     "unplugin-vue-components": "^32.0.0",
