@@ -63,5 +63,6 @@
     "vite-plugin-package-configs": "^0.0.12",
     "vitest": "^4.0.18",
     "vue-tsc": "^3.2.5"
-  }
+  },
+  "packageManager": "pnpm@10.29.2"
 }
