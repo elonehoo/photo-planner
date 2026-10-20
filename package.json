@@ -39,7 +39,7 @@
     "vue": "^3.5.29"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "7.6.1",
+    "@antfu/eslint-config": "9.5.1",
     "@iconify-json/carbon": "^1.2.19",
     "@iconify-json/mdi-light": "^1.2.2",
     "@types/chroma-js": "^3.1.2",
@@ -50,7 +50,7 @@
     "@vitest/ui": "^5.0.5",
     "@vue/test-utils": "^2.4.6",
     "bumpp": "^11.0.0",
-    "eslint": "^9.39.3",
+    "eslint": "^10.13.0",
     "happy-dom": "^21.0.3",
     "typescript": "^6.0.2",
     "unplugin-auto-import": "^21.0.0",
