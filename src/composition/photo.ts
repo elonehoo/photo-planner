@@ -1,9 +1,11 @@
 import { saveAs } from 'file-saver'
 import html2canvas from 'html2canvas'
 
+const filenameSeparators = /[:T]/g
+
 export async function takeScreenshot(
   selector = '#phone-case-inner',
-  filename = `foto-rehearsal-${new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-')}.png`,
+  filename = `foto-rehearsal-${new Date().toISOString().slice(0, 19).replace(filenameSeparators, '-')}.png`,
 ) {
   return new Promise<void>((resolve) => {
     html2canvas(
@@ -33,11 +35,11 @@ export const Serializers = {
     write(v: any) { return String(v) },
   },
   any: {
-    read(v: any, d: any) { return v !== null && v !== undefined ? v : d },
+    read(v: any, d: any) { return v ?? d },
     write(v: any) { return String(v) },
   },
   string: {
-    read(v: any, d: any) { return v !== null && v !== undefined ? v : d },
+    read(v: any, d: any) { return v ?? d },
     write(v: any) { return String(v) },
   },
 }
