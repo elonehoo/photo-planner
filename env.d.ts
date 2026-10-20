@@ -7,3 +7,9 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv
 }
+
+interface Window {
+  ColorThief: new () => {
+    getPalette: (image: HTMLImageElement, count: number) => [number, number, number][]
+  }
+}

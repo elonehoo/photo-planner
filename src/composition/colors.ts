@@ -1,4 +1,4 @@
-export function rgbToHex(r: any, g: any, b: any) {
+export function rgbToHex(r: number, g: number, b: number) {
   return `#${[r, g, b].map((x) => {
     const hex = x.toString(16)
     return hex.length === 1 ? `0${hex}` : hex
@@ -7,7 +7,7 @@ export function rgbToHex(r: any, g: any, b: any) {
 
 export async function getColors(url: string, amount = 5) {
   const img = document.createElement('img')
-  await new Promise((resolve) => {
+  await new Promise<void>((resolve) => {
     img.onload = () => resolve()
     img.src = url
   })

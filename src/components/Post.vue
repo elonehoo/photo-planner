@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<{
 
 const emit = defineEmits(['upload'])
 
-const colors = ref([])
+const colors = ref<string[]>([])
 
 onMounted(() => {
   watch(
