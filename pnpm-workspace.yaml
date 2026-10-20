@@ -1,5 +1,7 @@
 minimumReleaseAgeExcludePrune: true
 trustPolicy: no-downgrade
+strictPeerDependencies: false
+shamefullyHoist: true
 shellEmulator: true
 
 allowBuilds:
