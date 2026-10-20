@@ -1,3 +1,5 @@
+shamefullyHoist: true
+strictPeerDependencies: false
 shellEmulator: true
 
 trustPolicy: no-downgrade
