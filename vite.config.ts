@@ -1,3 +1,4 @@
+import { fileURLToPath, URL } from 'node:url'
 import Vue from '@vitejs/plugin-vue'
 import UnoCss from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -5,13 +6,19 @@ import DeployInfo from 'unplugin-deploy-info/vite'
 import Components from 'unplugin-vue-components/vite'
 /// <reference types="vitest" />
 import { defineConfig } from 'vite'
-import Alias from 'vite-plugin-alias'
-import AutoEnv from 'vite-plugin-auto-env'
 import Chai from 'vite-plugin-chai'
 import Classify from 'vite-plugin-classify'
 import PKG from 'vite-plugin-package-configs'
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      '~components': fileURLToPath(new URL('./src/components', import.meta.url)),
+      '~styles': fileURLToPath(new URL('./src/styles', import.meta.url)),
+      '~composition': fileURLToPath(new URL('./src/composition', import.meta.url)),
+      '~': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
   plugins: [
     // https://github.com/vitejs/vite-plugin-vue
     Vue(),
@@ -40,20 +47,11 @@ export default defineConfig({
     // see unocss.config.ts for config
     UnoCss(),
 
-    // https://github.com/elonehoo/vite-plugin-alias
-    Alias({
-      useConfig: true,
-      useTypescript: true,
-    }),
-
     // https://github.com/elonehoo/vite-plugin-package-configs
     PKG(),
 
     // https://github.com/wip-elonehoo/vite-plugin-chai
     Chai(),
-
-    // https://github.com/wip-elonehoo/vite-plugin-auto-env
-    AutoEnv(),
 
     // https://github.com/wip-elonehoo/vite-plugin-classify
     Classify(),

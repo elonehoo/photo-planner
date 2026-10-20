@@ -26,7 +26,7 @@ export function resizedataURL(url: any, MAX_WIDTH = 512, MAX_HEIGHT = 512) {
       canvas.width = width
       canvas.height = height
 
-      ctx!.drawImage(this, 0, 0, width, height)
+      ctx!.drawImage(img, 0, 0, width, height)
 
       resolve(canvas.toDataURL())
 

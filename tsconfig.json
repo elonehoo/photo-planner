@@ -6,21 +6,20 @@
       "DOM",
       "ESNext"
     ],
-    "baseUrl": ".",
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "paths": {
       "~components/*": [
-        "src/components/*"
+        "./src/components/*"
       ],
       "~styles/*": [
-        "src/styles/*"
+        "./src/styles/*"
       ],
       "~/*": [
-        "src/*"
+        "./src/*"
       ],
       "~composition/*": [
-        "src/composition/*"
+        "./src/composition/*"
       ]
     },
     "resolveJsonModule": true,
@@ -31,14 +30,16 @@
     "strict": true,
     "strictNullChecks": true,
     "noUnusedLocals": true,
+    "noEmit": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
   },
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.vue",
+    "test/**/*.ts",
+    "*.d.ts"
   ],
   "exclude": [
     "dist",

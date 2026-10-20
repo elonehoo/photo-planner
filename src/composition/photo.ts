@@ -5,7 +5,7 @@ export async function takeScreenshot(
   selector = '#phone-case-inner',
   filename = `foto-rehearsal-${new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-')}.png`,
 ) {
-  return new Promise((resolve) => {
+  return new Promise<void>((resolve) => {
     html2canvas(
       document.querySelector(selector)!,
       { scale: 4 },

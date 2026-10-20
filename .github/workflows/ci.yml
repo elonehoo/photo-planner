@@ -19,13 +19,23 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v7
         with:
-          node-version: latest
+          node-version: 24
 
       - name: Install pnpm
         uses: pnpm/action-setup@v6
 
       - name: Install
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --frozen-lockfile
+
+      # Vite generates the auto-import and component declarations used by vue-tsc.
+      - name: Build
+        run: pnpm run build
+
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Test
+        run: pnpm exec vitest run --coverage
 
       - name: Lint
         run: pnpm run lint
