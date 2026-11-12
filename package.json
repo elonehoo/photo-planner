@@ -44,7 +44,7 @@
     "@iconify-json/mdi-light": "^1.2.2",
     "@types/chroma-js": "^3.1.2",
     "@types/file-saver": "^2.0.7",
-    "@types/node": "^24.19.2",
+    "@types/node": "^26.6.6",
     "@typescript/typescript6": "^6.0.2",
     "@vitejs/plugin-vue": "^6.0.10",
     "@vitest/coverage-v8": "^5.0.5",
